@@ -87,6 +87,7 @@ This project is part of a research initiative. Please contact the repository own
 ## 👥 Authors
 
 - AditS-H
+- SilentCanary
 
 ## 🙏 Acknowledgments
 
