@@ -24,6 +24,9 @@ EarthSentinel is an advanced deep learning project that utilizes Siamese Neural 
 ├── generating_pairs.py        # Training pair generation
 ├── quick_train.py            # Fast training script
 ├── Batch_train.py            # Full batch training implementation
+|__ Inference.py
+|__ Drive.py                 #downloads raster files from drive and calls the whole pipeline
+|__ fetch_gee.py              # fetches satellite imagery form google earth engine
 └── Global_Landslide_Catalog_Export.csv  # Ground truth data
 ```
 
