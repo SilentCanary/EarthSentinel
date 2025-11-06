@@ -24,6 +24,8 @@ gauth = GoogleAuth()
 gauth.LoadCredentialsFile("credentials.json")
 gauth.settings["client_config_file"] = "client_secrets.json"
 
+
+
 if gauth.credentials is None:
     print("⚠️ No stored credentials, doing OAuth login...")
     gauth.LocalWebserverAuth()
@@ -48,9 +50,15 @@ print("✅ Folder found. ID:", folder_id)
 print("⬇ Downloading exported files...")
 
 file_list = drive.ListFile({'q': f"'{folder_id}' in parents and trashed=false"}).GetList()
+print("Files found in Drive folder:")
+for f in file_list:
+    print(f['title'])
 
 for f in file_list:
     filename = os.path.join(LOCAL_FOLDER, f['title'])
+    if os.path.exists(filename):
+        print(f"✅ Already downloaded → {filename}")
+        continue
     print(f"Downloading → {filename}")
     f.GetContentFile(filename)
 
@@ -67,13 +75,11 @@ for file in os.listdir(LOCAL_FOLDER):
 print("✅ Extraction complete.")
 
 print("🧩 Running patch creation (create_chunked_numpy_arrays.py)...")
-subprocess.run(["python", "create_chunked_patches.py"], check=True)
-"""
+subprocess.run(["python", "create_chunks.py"], check=True)
+
 
 print("🤖 Running model inference (model_inference.py)...")
-subprocess.run(["python", "model_inference.py"], check=True)
+subprocess.run(["python", "inference.py"], check=True)
 
-print("🌡️ Generating probability heatmap...")
-# The heatmap will be produced inside model_inference.py — we finalize there.
-"""
+
 print("🎉 PIPELINE COMPLETE.")
